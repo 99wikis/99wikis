@@ -1,0 +1,14 @@
+app: 99wikis
+component: express@1.0.8
+name: 99wikis-api
+
+inputs:
+  src: ./
+  memory: 256
+  timeout: 15
+  description: 99wikis app express api
+  roleName: ${output:99wikis-permissions.name}
+  # domain: api.${env:domain} Uncomment this when you want to use a custom domain
+  env:
+    TOKEN_SECRET: ${env:TOKEN_SECRET}
+    NODE_ENV: ${stage}

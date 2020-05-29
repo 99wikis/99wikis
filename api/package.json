@@ -1,0 +1,30 @@
+{
+  "name": "99wikis-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "@hapi/joi": "^15.1.1",
+    "aws-sdk": "^2.518.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.17.1",
+    "express-swagger-generator": "^1.1.15",
+    "express-validation": "^1.0.2",
+    "joi": "^14.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "scripts": {
+    "local": "NODE_ENV=local node app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

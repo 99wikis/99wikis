@@ -1,0 +1,32 @@
+app: 99wikis
+component: aws-iam-role@2.0.0
+name: 99wikis-permissions
+
+inputs:
+  name: ${name}-${stage}
+  region: us-east-1 
+  service: lambda.amazonaws.com                     
+  policy:
+    - Effect: Allow
+      Action:
+        - sts:AssumeRole
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:ListStreams
+        - dynamodb:GetRecords
+        - dynamodb:GetItem
+        - dynamodb:BatchGetItem
+        - dynamodb:PutItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - ${output:99wikis-db-user.arn}
+        - ${output:99wikis-db-article.arn}

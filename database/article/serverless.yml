@@ -1,0 +1,13 @@
+component: aws-dynamodb@1.1.1
+app: 99wikis
+name: 99wikis-db-article
+
+inputs:
+  name: 99wikis-db-article-${stage}
+  region: us-east-1
+  attributeDefinitions:
+    - AttributeName: id
+      AttributeType: S
+  keySchema:
+    - AttributeName: id
+      KeyType: HASH
