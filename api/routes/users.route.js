@@ -68,9 +68,9 @@ router.route('/:id')
       const userParam = Validator.validate(req.body, userSchema.userUpdate, errorCodes.USERS.INVALID_PAYLOAD);
       userParam.id = req.params.id;
 
-      await userBusiness.update(userParam);
+      const user = await userBusiness.update(userParam);
 
-      res.json(responseFactory.success());
+      res.json(responseFactory.success(user));
     } catch (e) {
       next(e);
     }

@@ -13,6 +13,9 @@ const errorCodes = {
     'NOT_APPROVED': 1007,
     'INVALID_PAYLOAD': 1008,
   },
+  'ARTICLES': {
+    'INVALID_PAYLOAD': 2001,
+  },
 };
 
 module.exports = { ...errorCodes };

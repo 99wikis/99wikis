@@ -32,7 +32,9 @@ const create = async(user = {}) => {
   user.approved = user.approved !== undefined ? user.approved : false;
   user.role = user.role || 'reader';
 
-  return await dynamoContext.put({ ...user });
+  await dynamoContext.put(user)
+
+  return user;
 }
 
 /**
@@ -49,16 +51,18 @@ const get = async(params = {}) => {
  * @param {string} user.approved User approval state
  * @param {string} user.role User role
  */
-const update = async(user = {}) => {
-  const existingUser = await getById(user.id);
+const update = async(userParam = {}) => {
+  const existingUser = await getById(userParam.id);
 
   if (!existingUser) throw new DefaultException(errorCodes.NOT_FOUND, `User not found`, 404);
 
-  const userModel = { ...existingUser };
-  userModel.approved = user.approved;
-  userModel.role = user.role;
+  const user = { ...existingUser };
+  user.approved = userParam.approved;
+  user.role = userParam.role;
 
-  return await dynamoContext.put({ ...userModel });
+  await dynamoContext.put(user);
+
+  return user;
 }
 
 /**
