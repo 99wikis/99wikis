@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const bodyparser = require('body-parser');
 const config = require('./infrastructure/config');
 const routes = require('./routes');
@@ -16,23 +17,14 @@ require('./infrastructure/passport')(passport);
  * Configure Express.js Middleware
  */
 
-// Enable CORS
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('x-powered-by', 'serverless-express');
-  next();
-});
+app.use(cors());
 
 // Initialize Passport and restore authentication state, if any, from the session
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(optionalAuthInterceptor(passport));
 
-// Enable JSON use
 app.use(express.json());
-
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.disable('etag');
