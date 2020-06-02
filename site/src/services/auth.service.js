@@ -1,6 +1,6 @@
 import HttpHandler from './handlers/http.handler';
 
-const baseRoute = '/applies';
+const baseRoute = '/auth';
 
 const getSession = async () => {
   return HttpHandler.request(`${baseRoute}`, 'GET');

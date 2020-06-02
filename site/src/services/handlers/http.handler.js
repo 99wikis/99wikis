@@ -7,14 +7,14 @@ function buildRequestOptions(method, options) {
     'Content-Type': 'application/json',
   };
 
-  if (window.localStorage.getItem('token')) headers.Authentication = window.localStorage.getItem('token');
+  if (window.localStorage.getItem('token')) headers.Authorization = `Bearer ${window.localStorage.getItem('token')}`;
 
   const { credentials } = options || {};
 
   return {
     method: method,
     headers: headers,
-    credentials: credentials || 'include',
+    credentials: credentials || 'same-origin',
   };
 }
 
