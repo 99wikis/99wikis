@@ -13,6 +13,10 @@ class Routes extends Component {
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path='/' component={Pages.Home} />
+            <PrivateRoute exact path='/a/new' component={Pages.ArticleEdit} />
+            <PrivateRoute exact path='/a/:id' component={Pages.Article} />
+            <PrivateRoute exact path='/a/:id/edit' component={Pages.ArticleEdit} />
+
             <Route exact path='/login' component={Pages.Login} />
             <Route exact path='/register' component={Pages.Register} />
 

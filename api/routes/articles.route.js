@@ -8,22 +8,23 @@ const { mandatoryAuthInterceptor } = require('../interceptors/auth.interceptor')
 
 const router = express.Router();
 
-router.all(mandatoryAuthInterceptor());
+router.use(mandatoryAuthInterceptor());
 
 router.route('/')
   /**
-   * List all Articles
+   * List articles - search string on articles body and title
    * @group Articles - Operations to manipulate Articles
-   * @operationId articleGetAll
+   * @operationId articleGetSearch
    * @route GET /articles
    * @produces application/json
+   * @param {string} query.query - The search query
    * @returns {Array.<Article>} 200 - Articles
    * @returns {Response.model}  default - Unexpected error
    * @security JWT
    */
   .get(async (req, res, next) => {
     try {
-      const articles = await articleBusiness.get({});
+      const articles = await articleBusiness.search(req.query.query);
 
       res.json(responseFactory.success(articles));
     } catch (e) {
@@ -69,28 +70,6 @@ router.route('/')
       const topics = await articleBusiness.getTopics();
 
       res.json(responseFactory.success(topics));
-    } catch (e) {
-      next(e);
-    }
-  });
-
-router.route('/search')
-  /**
-   * Search string on articles body and title
-   * @group Articles - Operations to manipulate Articles
-   * @operationId articleSearch
-   * @route GET /articles/search
-   * @produces application/json
-   * @param {string} query.query.required - The search query
-   * @returns {Array.<Article>} 200 - Articles
-   * @returns {Response.model}  default - Unexpected error
-   * @security JWT
-   */
-  .get(async (req, res, next) => {
-    try {
-      const articles = await articleBusiness.search(req.query.query);
-
-      res.json(responseFactory.success(articles));
     } catch (e) {
       next(e);
     }

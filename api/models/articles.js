@@ -52,7 +52,7 @@ const search = async(query) => {
   }
 
   let articles = await dynamoContext.scan({
-    ProjectionExpression: 'id, topic, title',
+    ProjectionExpression: 'id, topic, title, createdByName, createdAt',
     ...filters,
   });
 

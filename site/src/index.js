@@ -6,11 +6,9 @@ import customTheme from './theme';
 import './index.scss'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={customTheme}>
-      <CSSReset />
-      <Routes />
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={customTheme}>
+    <CSSReset />
+    <Routes />
+  </ThemeProvider>,
   document.getElementById('root')
 )
