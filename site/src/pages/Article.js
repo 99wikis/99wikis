@@ -136,16 +136,18 @@ export default class extends Component {
               </Box>
             </Box>
 
-            <Menu>
-              <MenuButton as={Button} rightIcon="chevron-down">
-                <Box as={IoIosMore} />
-              </MenuButton>
-              <MenuList>
-                <MenuItem as={Link} to={`/a/${this.state.article.id}/edit`}>Edit</MenuItem>
-                <MenuItem onClick={() => this.togglePublic()}>{ this.state.article.public ? 'Make private' : 'Make public' }</MenuItem>
-                <MenuItem onClick={() => this.toggleDeleteConfirm()}>Delete</MenuItem>
-              </MenuList>
-            </Menu>
+            { this.props.sessionUser.role !== 'reader' && (
+              <Menu>
+                <MenuButton as={Button} rightIcon="chevron-down">
+                  <Box as={IoIosMore} />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem as={Link} to={`/a/${this.state.article.id}/edit`}>Edit</MenuItem>
+                  <MenuItem onClick={() => this.togglePublic()}>{ this.state.article.public ? 'Make private' : 'Make public' }</MenuItem>
+                  <MenuItem onClick={() => this.toggleDeleteConfirm()}>Delete</MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Box>
 
           <Box

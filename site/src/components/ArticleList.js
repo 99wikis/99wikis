@@ -52,9 +52,12 @@ export default class extends Component {
       >
         <Box d="flex" justifyContent="space-between" >
           <Heading marginBottom={3} size="xl">Articles</Heading>
-          <Button variantColor="blue" variant="solid" as={Link} to="/a/new">
-            Create Article
-          </Button>
+
+          { this.props.sessionUser.role !== 'reader' && (
+            <Button variantColor="blue" variant="solid" as={Link} to="/a/new">
+              Create Article
+            </Button>
+          )}
         </Box>
 
         { this.state.articles.map(article => <Article article={article} />) } 

@@ -24,7 +24,7 @@ export default class extends Component {
         >
           <TopicList />
 
-          <ArticleList />
+          <ArticleList {...this.props} />
         </Box>
       </div>
     );

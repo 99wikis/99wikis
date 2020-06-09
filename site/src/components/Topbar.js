@@ -50,7 +50,7 @@ export default (props) => {
           <DrawerBody>
             <Heading size="lg" as="h4" mb={3}>Hi {props.sessionUser.name}</Heading>
             <p my={1}><Link to="/">Go to dashboard</Link></p>
-            <p my={1}><Link to="/users">Manage users</Link></p>
+            { props.sessionUser.role === 'admin' && (<p my={1}><Link to="/users">Manage users</Link></p>) }
             <p my={1}><Link onClick={logout}>Logout</Link></p>
           </DrawerBody>
         </DrawerContent>

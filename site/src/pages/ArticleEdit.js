@@ -16,6 +16,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Checkbox,
+  Text,
 } from "@chakra-ui/core";
 import toastrService from '../services/toastr.service';
 import articleService from '../services/article.service';
@@ -101,42 +102,7 @@ export default class extends Component {
           p={6}
           overflow="hidden"
         >
-          <Breadcrumb
-            spacing="8px"
-            separator={<Icon color="gray.300" name="chevron-right" />}
-            marginBottom={4}
-          >
-            <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/">Dashboard</BreadcrumbLink>
-            </BreadcrumbItem>
-
-            {
-              this.state.article.id 
-              && (
-                <BreadcrumbItem>
-                  <BreadcrumbLink  as={Link} to={`/a/${this.state.article.id}`}>{ this.state.article.title }</BreadcrumbLink>
-                </BreadcrumbItem>
-              )
-            }
-
-            {
-              this.state.article.id 
-              && (
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink>Edit</BreadcrumbLink>
-                </BreadcrumbItem>
-              )
-            }
-
-            {
-              !this.state.article.id
-              && (
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink>New Article</BreadcrumbLink>
-                </BreadcrumbItem>
-              )
-            }
-          </Breadcrumb>
+          <PageBreadcrumb article={this.state.article} />
 
           <Formik
             initialValues={this.state.article}
@@ -151,6 +117,7 @@ export default class extends Component {
                     <Field name="title" validate={(value) => this.validateRequired(value)}>
                       {({ field, form }) => (
                         <FormControl isInvalid={form.errors.title && (form.touched.title || form.submitCount > 0)}>
+                          <Text fontSize="lg" fontWeight={600}>Title</Text>
                           <Input id="title" {...field} variant="flushed" placeholder="Article title (i.e. How to get to the moon in topic 30 minutes)" size="lg" />
                           <FormErrorMessage>{form.errors.title}</FormErrorMessage>
                         </FormControl>
@@ -162,7 +129,8 @@ export default class extends Component {
                     <Field name="topic" validate={(value) => this.validateRequired(value)}>
                       {({ field, form }) => (
                         <FormControl isInvalid={form.errors.topic && (form.touched.topic || form.submitCount > 0)}>
-                          <Input id="topic" {...field} variant="flushed" placeholder="Article topic (i.e. Engineering)" />
+                          <Text fontSize="lg" fontWeight={600}>Topic</Text>
+                          <Input label="Topic" id="topic" {...field} variant="flushed" placeholder="Article topic (i.e. Engineering)" />
                           <FormErrorMessage>{form.errors.topic}</FormErrorMessage>
                         </FormControl>
                       )}
@@ -215,3 +183,42 @@ export default class extends Component {
     );
   }
 };
+
+const PageBreadcrumb = ({ article } = {}) => (
+  <Breadcrumb
+    spacing="8px"
+    separator={<Icon color="gray.300" name="chevron-right" />}
+    marginBottom={4}
+  >
+    <BreadcrumbItem>
+      <BreadcrumbLink as={Link} to="/">Dashboard</BreadcrumbLink>
+    </BreadcrumbItem>
+
+    {
+      article.id 
+      && (
+        <BreadcrumbItem>
+          <BreadcrumbLink  as={Link} to={`/a/${article.id}`}>{ article.title }</BreadcrumbLink>
+        </BreadcrumbItem>
+      )
+    }
+
+    {
+      article.id 
+      && (
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink>Edit</BreadcrumbLink>
+        </BreadcrumbItem>
+      )
+    }
+
+    {
+      !article.id
+      && (
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink>New Article</BreadcrumbLink>
+        </BreadcrumbItem>
+      )
+    }
+  </Breadcrumb>
+)

@@ -16,6 +16,7 @@ class Routes extends Component {
             <PrivateRoute exact path='/a/new' component={Pages.ArticleEdit} />
             <PrivateRoute exact path='/a/:id' component={Pages.Article} />
             <PrivateRoute exact path='/a/:id/edit' component={Pages.ArticleEdit} />
+            <PrivateRoute exact path='/users' component={Pages.UserManagement} />
 
             <Route exact path='/login' component={Pages.Login} />
             <Route exact path='/register' component={Pages.Register} />
