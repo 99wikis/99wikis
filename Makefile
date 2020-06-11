@@ -30,8 +30,11 @@ deploy/api: ## Deploy (via serverless) the API
 
 deploy/site: ## Deploy (via serverless) the WebApp
 	@echo ">>> Deploying site..."
-	@cd site && \
-	serverless deploy --stage $(STAGE)
+	@cd api && \
+		export API_URL=`serverless info --stage $(STAGE) | sed -e 's/\[22m//g' | grep "url:" | cut -d " " -f2` && \
+		cd ../site && \
+		(echo "cat <<EOF" ; cat src/infrastructure/config.template.js ; echo EOF) | sh | sed 's/EOF//g' > src/infrastructure/config.js && \
+		serverless deploy --stage $(STAGE)
 
 remove: remove/permissions remove/database remove/api remove/site ## Remove (via serverless) the entire app
 
