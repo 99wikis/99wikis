@@ -1,4 +1,5 @@
 _disclaimer: this is still work-in-progress_
+Simple demo, as a "reader" user: https://dweki3j8gnibr.cloudfront.net/login
 
 # 99wikis
 Knowledge Base App - Simple, Free and Serverless _(and open-source)_
